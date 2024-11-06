@@ -7,10 +7,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.RomiDrivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 
@@ -27,7 +29,11 @@ public class RobotContainer
     
     private final ExampleCommand autoCommand = new ExampleCommand(romiDrivetrain);
     private final Joystick joystick = new Joystick(0);
-    
+    JoystickButton joystickButton1 = new JoystickButton(joystick, 1);
+    JoystickButton joystickButton2 = new JoystickButton(joystick, 2);
+    JoystickButton joystickButton3 = new JoystickButton(joystick, 3);
+    private final XboxController controller = new XboxController(0); // Assuming Xbox controller on port 0
+
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer()
     {
@@ -44,6 +50,9 @@ public class RobotContainer
      */
     private void configureButtonBindings() {
         romiDrivetrain.setDefaultCommand(new RunCommand(() -> romiDrivetrain.arcadeDrive(joystick.getRawAxis(0), joystick.getRawAxis(1)), romiDrivetrain));
+        joystickButton1.onTrue(romiDrivetrain.driveStraight(1, 5));
+        joystickButton2.onTrue(driveSquare());
+        joystickButton3.onTrue(romiDrivetrain.circle(1, 10));
     }
     
     
@@ -56,5 +65,18 @@ public class RobotContainer
     {
         // An ExampleCommand will run in autonomous
         return autoCommand;
+    }
+
+    public Command driveSquare() {
+        return Commands.sequence(
+                romiDrivetrain.driveStraight(1, 1),
+                romiDrivetrain.turn(1, 0.2),
+                romiDrivetrain.driveStraight(1, 1),
+                romiDrivetrain.turn(1, 0.2),
+                romiDrivetrain.driveStraight(1, 1),
+                romiDrivetrain.turn(1, 0.2),
+                romiDrivetrain.driveStraight(1, 1),
+                romiDrivetrain.turn(1, 0.2)
+        );
     }
 }

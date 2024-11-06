@@ -5,6 +5,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.RomiDrivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -13,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 /** An example command that uses an example subsystem. */
 public class ExampleCommand extends Command
 {
-    @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final RomiDrivetrain subsystem;
     
     
@@ -25,8 +25,7 @@ public class ExampleCommand extends Command
     public ExampleCommand(RomiDrivetrain subsystem)
     {
         this.subsystem = subsystem;
-        // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(subsystem);
+//        return new RunCommand(() -> subsystem.arcadeDrive());
     }
     
     
