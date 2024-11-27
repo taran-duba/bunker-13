@@ -50,9 +50,9 @@ public class RobotContainer
      */
     private void configureButtonBindings() {
         romiDrivetrain.setDefaultCommand(new RunCommand(() -> romiDrivetrain.arcadeDrive(joystick.getRawAxis(0), joystick.getRawAxis(1)), romiDrivetrain));
-        joystickButton1.onTrue(romiDrivetrain.driveStraight(1, 5));
+        joystickButton1.onTrue(romiDrivetrain.driveStraight(1, 3));
         joystickButton2.onTrue(driveSquare());
-        joystickButton3.onTrue(romiDrivetrain.circle(1, 10));
+        joystickButton3.onTrue(romiDrivetrain.circle(1, 15));
     }
     
     
@@ -70,13 +70,13 @@ public class RobotContainer
     public Command driveSquare() {
         return Commands.sequence(
                 romiDrivetrain.driveStraight(1, 1),
-                romiDrivetrain.turn(1, 0.2),
+                romiDrivetrain.turn(1, 0.25),
                 romiDrivetrain.driveStraight(1, 1),
-                romiDrivetrain.turn(1, 0.2),
+                romiDrivetrain.turn(1, 0.25),
                 romiDrivetrain.driveStraight(1, 1),
-                romiDrivetrain.turn(1, 0.2),
+                romiDrivetrain.turn(1, 0.25),
                 romiDrivetrain.driveStraight(1, 1),
-                romiDrivetrain.turn(1, 0.2)
+                romiDrivetrain.turn(1, 0.25)
         );
     }
 }
