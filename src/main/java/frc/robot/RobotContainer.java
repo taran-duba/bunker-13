@@ -32,6 +32,7 @@ public class RobotContainer
     JoystickButton joystickButton1 = new JoystickButton(joystick, 1);
     JoystickButton joystickButton2 = new JoystickButton(joystick, 2);
     JoystickButton joystickButton3 = new JoystickButton(joystick, 3);
+    JoystickButton joystickButton4 = new JoystickButton(joystick, 4);
     private final XboxController controller = new XboxController(0); // Assuming Xbox controller on port 0
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -49,10 +50,11 @@ public class RobotContainer
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        romiDrivetrain.setDefaultCommand(new RunCommand(() -> romiDrivetrain.arcadeDrive(joystick.getRawAxis(0), joystick.getRawAxis(1)), romiDrivetrain));
+        romiDrivetrain.setDefaultCommand(new RunCommand(() -> romiDrivetrain.arcadeDrive(-2 * joystick.getRawAxis(1), -2 * joystick.getRawAxis(0)), romiDrivetrain));
         joystickButton1.onTrue(romiDrivetrain.driveStraight(1, 3));
-        joystickButton2.onTrue(driveSquare());
-        joystickButton3.onTrue(romiDrivetrain.circle(1, 15));
+        joystickButton3.onTrue(driveSquare());
+        joystickButton2.onTrue(romiDrivetrain.circle(1, 15));
+        joystickButton4.onTrue(w());
     }
     
     
@@ -77,6 +79,18 @@ public class RobotContainer
                 romiDrivetrain.turn(1, 0.25),
                 romiDrivetrain.driveStraight(1, 1),
                 romiDrivetrain.turn(1, 0.25)
+        );
+    }
+    public Command w() {
+        return Commands.sequence(
+            romiDrivetrain.turn(0.5, 0.25),
+            romiDrivetrain.driveStraight(1, 1),
+            romiDrivetrain.turn(-1, 0.45),
+            romiDrivetrain.driveStraight(1, 1),
+            romiDrivetrain.turn(1, 0.45),
+            romiDrivetrain.driveStraight(1, 1),
+            romiDrivetrain.turn(-1, 0.45),
+            romiDrivetrain.driveStraight(1, 1)
         );
     }
 }

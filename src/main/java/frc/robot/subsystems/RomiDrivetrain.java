@@ -59,12 +59,12 @@ public class RomiDrivetrain extends SubsystemBase
         return runEnd(() -> arcadeDrive(power, 0), () -> arcadeDrive(0, 0)).withTimeout(timeout);
     }
 
-    public Command turn(double power, double timeout) {
-        return runEnd(() -> arcadeDrive(0, power), () -> arcadeDrive(0, 0)).withTimeout(timeout);
+    public Command turn(double rotate, double timeout) {
+        return runEnd(() -> arcadeDrive(0, rotate), () -> arcadeDrive(0, 0)).withTimeout(timeout);
     }
 
     public Command circle(double power, double timeout) {
-        return runEnd(() -> arcadeDrive(power, 0.5), () -> arcadeDrive(0, 0)).withTimeout(timeout);
+        return runEnd(() -> arcadeDrive(power, 0.75), () -> arcadeDrive(0, 0)).withTimeout(timeout);
     }
 
 
